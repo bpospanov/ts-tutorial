@@ -1,22 +1,33 @@
 "use strict";
-// reusable interfaces
-const something = { quantity: 50 };
-function printQuantity(item) {
-    console.log(`the qty of the item is ${item.quantity}`);
+// function signatures
+function addTwoNumbers(a, b) {
+    return a + b;
 }
-const fruit = {
-    name: 'mango',
-    quantity: 50
+function multipleTwoNumbers(first, second) {
+    return first * second;
+}
+function squareNumber(num) {
+    return num * num;
+}
+function joinTwoNumbers(numOne, numTwo) {
+    return `${numOne}${numTwo}`;
+}
+let calcs = [];
+calcs.push(addTwoNumbers);
+calcs.push(multipleTwoNumbers);
+calcs.push(squareNumber);
+calcs.push(joinTwoNumbers);
+const shapeOne = {
+    name: 'square',
+    calcArea(l) {
+        return l * l;
+    }
 };
-const vehicle = {
-    type: 'car',
-    quantity: 3
+const shapeTwo = {
+    name: 'circle',
+    calcArea(r) {
+        return Math.PI * r ^ 2;
+    }
 };
-const person = {
-    name: 'mario',
-    age: 30
-};
-printQuantity(fruit);
-printQuantity(vehicle); // object ahead of time AOT
-printQuantity(person); // error
-printQuantity({ quantity: 29, title: 'something' }); // error when directly pas object
+shapeOne.calcArea(5);
+shapeTwo.calcArea(10);
