@@ -1,17 +1,17 @@
 "use strict";
-// type aliases
-function getRandomColor() {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return [r, g, b];
+// union types
+let someId;
+someId = 1;
+someId = '2';
+let email = null;
+email = `mario@netninja.dev`;
+email = null;
+let anotherId;
+anotherId = '123dasdasd';
+anotherId = 5;
+// union type pitfall
+function swapIdType(id) {
+    parseInt(id);
+    return id;
 }
-const colorOne = getRandomColor();
-const colorTwo = getRandomColor();
-console.log(colorOne, colorTwo);
-const userOne = { name: 'mario', score: 75 };
-function formatUser(user) {
-    console.log(`${user.name} has a score of ${user.score}`);
-}
-formatUser(userOne);
-formatUser({ name: "yoshi", score: 100 });
+swapIdType("5");
