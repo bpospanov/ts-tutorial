@@ -1,21 +1,17 @@
 "use strict";
-// interfaces
-const authorOne = {
-    name: "mario",
-    avatar: "/img/mario.png",
-};
-const newPost = {
-    title: 'my first post',
-    body: 'something interesting',
-    tags: ['gaming', 'tech'],
-    create_at: new Date(),
-    author: authorOne,
-};
-// as function argument types
-function createPost(post) {
-    console.log(`Created post ${post.title} by ${post.author.name}`);
+// type aliases
+function getRandomColor() {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return [r, g, b];
 }
-createPost(newPost);
-// with arrays
-let posts = [];
-posts.push(newPost);
+const colorOne = getRandomColor();
+const colorTwo = getRandomColor();
+console.log(colorOne, colorTwo);
+const userOne = { name: 'mario', score: 75 };
+function formatUser(user) {
+    console.log(`${user.name} has a score of ${user.score}`);
+}
+formatUser(userOne);
+formatUser({ name: "yoshi", score: 100 });
