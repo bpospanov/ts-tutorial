@@ -8,7 +8,7 @@ interface Payment {
 }
 
 
-const paymentWriter = new CSVWriter<Payment>(['id', 'amount', 'to'])
+const paymentWriter = new CSVWriter<Payment>(['id', 'amount', 'to', 'notes'])
 
 paymentWriter.addRows([
     { id: 1, amount: 50, to: 'yoshi', notes: 'for design work'},
