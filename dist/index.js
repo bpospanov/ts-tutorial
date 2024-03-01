@@ -1,29 +1,20 @@
 "use strict";
-// CSV Writer Project
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = require("fs");
-class CSVWriter {
-    constructor(columns) {
-        this.columns = columns;
-        this.csv = this.columns.join(',') + '\n';
-    }
-    save(filename) {
-        (0, fs_1.appendFileSync)(filename, this.csv);
-        this.csv = '\n';
-        console.log('file saved to ', filename);
-    }
-    addRows(values) {
-        let rows = values.map((v) => this.formatRow(v));
-        this.csv += rows.join('\n');
-        console.log(this.csv);
-    }
-    formatRow(p) {
-        return this.columns.map((col) => p[col]).join(',');
-    }
+// generics 101
+function logAndReturnValue(val) {
+    console.log(val);
+    return val;
 }
-const writer = new CSVWriter(['id', 'amount', 'to', 'notes']);
-writer.addRows([
-    { id: 1, amount: 50, to: 'yoshi', notes: 'for design work' },
-    { id: 2, amount: 100, to: 'mario', notes: 'for dev work' }
-]);
-writer.save('./data/payments.csv');
+const resultOne = logAndReturnValue('mario');
+const resultTwo = logAndReturnValue(25);
+function getRandomArrayValue(values) {
+    const i = Math.floor(Math.random() * values.length);
+    return values[i];
+}
+const users = [
+    { name: "mario", score: 60 },
+    { name: "luigi", score: 620 },
+    { name: "bowser", score: 630 },
+    { name: "nana", score: 610 },
+];
+console.log(getRandomArrayValue(users));
+console.log(getRandomArrayValue(users));
