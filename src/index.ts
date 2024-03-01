@@ -1,43 +1,36 @@
-// Generic Constraints
+// CSV Writer Project
+
+import { appendFileSync } from 'fs'
 
 
-interface HasId {
-    id: number
+export class CSVWriter<T> {
+    constructor(private columns: (keyof T)[]) {
+        this.csv = this.columns.join(',') + '\n'
+    }
+
+    private csv: string
+
+    save(filename: string): void {
+        appendFileSync(filename, this.csv)
+        this.csv = '\n'
+
+        console.log('file saved to ', filename)
+    }
+
+    addRows(values: T[]): void {
+        let rows = values.map((v) => this.formatRow(v))
+
+        this.csv += rows.join('\n')
+
+        console.log(this.csv)
+    }
+
+    private formatRow(value: T): string {
+        return this.columns.map((col) => value[col]).join(',')
+    }
 }
-class DataCollection<T extends HasId> {
-    constructor (private data: T[]) {}
 
-    loadOne(): T {
-        const idx = Math.floor(Math.random() * this.data.length)
-        return this.data[idx]
-    }
-    loadAll(): T[] {
-        return this.data
-    }
-    add(val: T): T[] {
-        this.data.push(val)
-        return this.data
-    }
 
-    deleteOne(id: number): void {
-        this.data = this.data.filter((item) => item.id !==id)
-    }
-}
 
-interface User {
-    name: string
-    score: number
-    id: number
-}
 
-const users = new DataCollection<User>([
-    { name: 'shaun', score: 125, id: 3},
-    { name: 'mario', score: 100, id: 2},
-    { name: 'peach', score: 150, id: 1},
-])
 
-users.add({name: 'luigi', score: 50, id: 12})
-users.deleteOne(3)
-
-console.log('load one - ', users.loadOne())
-console.log('load all - ', users.loadAll())
