@@ -1,9 +1,17 @@
 "use strict";
 // classes 101
-class Pizza {
+class MenuItem {
     constructor(title, price) {
         this.title = title;
         this.price = price;
+    }
+    get details() {
+        return `${this.title} - $${this.price}`;
+    }
+}
+class Pizza extends MenuItem {
+    constructor(title, price) {
+        super(title, price);
         this.base = 'classic';
         this.toppings = [];
     }
@@ -17,12 +25,8 @@ class Pizza {
         this.base = b;
     }
 }
-const pizzaOne = new Pizza('mario special', 15);
-const pizzaTwo = new Pizza('luigi special', 10);
-function addMushroomsToPizza(pizzas) {
-    for (const pizza of pizzas) {
-        pizza.addTopping('mushrooms');
-    }
+const pizza = new Pizza('mario special', 15);
+function printMenuItem(item) {
+    console.log(item.details);
 }
-addMushroomsToPizza([pizzaOne, pizzaTwo]);
-console.log(pizzaOne, pizzaTwo);
+printMenuItem(pizza);
