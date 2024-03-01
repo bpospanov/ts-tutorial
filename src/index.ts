@@ -3,12 +3,19 @@
 
 type Base = 'classic' | 'thick' | 'thin' | 'garlic'
 
+interface HasFormatter {
+    format(): string
+}
 
-class MenuItem {
+class MenuItem implements HasFormatter{
     constructor(private title: string, private price: number) {}
 
     get details(): string {
         return `${this.title} - $${this.price}`
+    }
+
+    format() {
+        return `This menu item is called ${this.title} and is $${this.price}`
     }
 }
 
@@ -36,8 +43,8 @@ class Pizza extends MenuItem {
 
 const pizza = new Pizza('mario special', 15)
 
-function printMenuItem(item: MenuItem): void {
-    console.log(item.details)
+function printFormatted(val: HasFormatter): void {
+    console.log(val.format())
 }
 
-printMenuItem(pizza)
+printFormatted(pizza)
