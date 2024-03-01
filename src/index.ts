@@ -1,30 +1,29 @@
-// generics 101
+// Intersection Type
 
-function logAndReturnValue<T>(val: T) {
-    console.log(val)
-    return val
+interface HasID {
+    id: number
 }
 
-const resultOne = logAndReturnValue<string>('mario')
-const resultTwo = logAndReturnValue<number>(25)
+function addIdToValue<T>(val: T): T & HasID {
+    const id = Math.random()
 
-function getRandomArrayValue<T>(values: T[]): T {
-    const i = Math.floor(Math.random() * values.length)
-
-    return values[i]
+    return { ...val, id }
 }
 
-interface User {
-    name: string
-    score: number
+interface Post {
+    title: string
+    thumbsUp: number
 }
 
-const users: User[] = [
-    { name: "mario", score: 60},
-    { name: "luigi", score: 620},
-    { name: "bowser", score: 630},
-    { name: "nana", score: 610},
-]
+const post = addIdToValue<Post>({ title: 'Marmite Rules', thumbsUp: 250 })
 
-console.log(getRandomArrayValue<User>(users))
-console.log(getRandomArrayValue<User>(users))
+console.log(post.id)
+
+
+
+
+
+
+
+
+
