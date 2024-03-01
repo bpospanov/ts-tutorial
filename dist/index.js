@@ -1,16 +1,30 @@
 "use strict";
-// Generic Interface
-const collectionOne = {
-    data: ['mario', 'luigi', 'peach'],
-    name: 'mario characters'
-};
-const collectionTwo = {
-    data: [10, 2, 3, 4],
-    name: 'winning lottery numbers',
-};
-function randomCollectionItem(c) {
-    const idx = Math.floor(Math.random() * c.data.length);
-    return c.data[idx];
+// Generic Constraints
+class DataCollection {
+    constructor(data) {
+        this.data = data;
+    }
+    loadOne() {
+        const idx = Math.floor(Math.random() * this.data.length);
+        return this.data[idx];
+    }
+    loadAll() {
+        return this.data;
+    }
+    add(val) {
+        this.data.push(val);
+        return this.data;
+    }
+    deleteOne(id) {
+        this.data = this.data.filter((item) => item.id !== id);
+    }
 }
-console.log(randomCollectionItem(collectionOne));
-console.log(randomCollectionItem(collectionTwo));
+const users = new DataCollection([
+    { name: 'shaun', score: 125, id: 3 },
+    { name: 'mario', score: 100, id: 2 },
+    { name: 'peach', score: 150, id: 1 },
+]);
+users.add({ name: 'luigi', score: 50, id: 12 });
+users.deleteOne(3);
+console.log('load one - ', users.loadOne());
+console.log('load all - ', users.loadAll());
