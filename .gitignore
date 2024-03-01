@@ -1,3 +1,4 @@
 /.idea/
 /typescript-tutorial.iml
 /node_modules/
+/.parcel-cache/
